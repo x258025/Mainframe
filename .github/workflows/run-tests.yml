@@ -45,6 +45,7 @@ jobs:
 
     - name: Lint
       run: |
+        sudo pip-3.3 install pylint
         inv lint
 
     - name: Run utests with coverage
