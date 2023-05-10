@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.7.4rc1 on win32)" generated="20230412 14:13:47.023" rpa="false" schemaversion="3">
+<suite id="s1" name="Robot Interactive Console" source="c:\Users\himanshu.singh01\.vscode\extensions\robocorp.robotframework-lsp-1.9.0\src\robotframework_ls\vendored\robotframework_interactive\robot_interactive_console.robot">
+<test id="s1-t1" name="Default Task/Test" line="5">
+<kw name="Interpreter Main Loop" library="MainLoop">
+<kw name="Read">
+<var>${read_env_title}</var>
+<arg>19</arg>
+<arg>013</arg>
+<arg>41</arg>
+<msg timestamp="20230412 14:13:48.319" level="FAIL">No keyword with name 'Read' found.</msg>
+<status status="FAIL" starttime="20230412 14:13:48.319" endtime="20230412 14:13:48.319"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${WELCOME_TITLE}</arg>
+<arg>${read_env_title}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" starttime="20230412 14:13:48.319" endtime="20230412 14:13:48.319"/>
+</kw>
+<kw name="Write Bare">
+<arg>${WRITE_TEXT}</arg>
+<status status="NOT RUN" starttime="20230412 14:13:48.327" endtime="20230412 14:13:48.327"/>
+</kw>
+<kw name="Take Screenshot">
+<status status="NOT RUN" starttime="20230412 14:13:48.327" endtime="20230412 14:13:48.327"/>
+</kw>
+<kw name="Send Enter">
+<status status="NOT RUN" starttime="20230412 14:13:48.327" endtime="20230412 14:13:48.327"/>
+</kw>
+<kw name="Write Bare">
+<arg>${ENV_USERNAME}</arg>
+<status status="NOT RUN" starttime="20230412 14:13:48.327" endtime="20230412 14:13:48.327"/>
+</kw>
+<kw name="Move Next Field">
+<status status="NOT RUN" starttime="20230412 14:13:48.335" endtime="20230412 14:13:48.335"/>
+</kw>
+<kw name="Write Bare">
+<arg>${ENV_PASSWORD}</arg>
+<status status="NOT RUN" starttime="20230412 14:13:48.335" endtime="20230412 14:13:48.335"/>
+</kw>
+<kw name="Take Screenshot">
+<status status="NOT RUN" starttime="20230412 14:13:48.335" endtime="20230412 14:13:48.335"/>
+</kw>
+<kw name="Send Enter">
+<status status="NOT RUN" starttime="20230412 14:13:48.335" endtime="20230412 14:13:48.335"/>
+</kw>
+<kw name="Write Bare">
+<arg>${SELECT_NEWS}</arg>
+<status status="NOT RUN" starttime="20230412 14:13:48.340" endtime="20230412 14:13:48.341"/>
+</kw>
+<kw name="Take Screenshot">
+<status status="NOT RUN" starttime="20230412 14:13:48.341" endtime="20230412 14:13:48.341"/>
+</kw>
+<kw name="Send Enter">
+<status status="NOT RUN" starttime="20230412 14:13:48.341" endtime="20230412 14:13:48.341"/>
+</kw>
+<status status="PASS" starttime="20230412 14:13:47.041" endtime="20230412 14:13:53.113"/>
+</kw>
+<status status="PASS" starttime="20230412 14:13:47.033" endtime="20230412 14:13:53.113"/>
+</test>
+<status status="PASS" starttime="20230412 14:13:47.025" endtime="20230412 14:13:53.115"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Robot Interactive Console">Robot Interactive Console</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
