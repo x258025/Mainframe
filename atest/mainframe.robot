@@ -1,6 +1,5 @@
 *** Settings ***
-Documentation     These tests verify that all keywords are working correctly
-...               and displaying the expected exception message.
+Documentation     These tests verify All mainframe application is Up or Not
 Suite Setup       Suite Setup
 Suite Teardown    Suite Teardown
 Library           ../Mainframe3270/    run_on_failure_keyword=None
@@ -11,50 +10,61 @@ Library           ./utils.py
 Resource          mainframe_variables.robot
 *** Test Cases ***
 CRIS3: Customer Records Information System 3 / Service Order System: AB
+    Log To Console    ${\n}Step1- Login into the TPX AB Cris in IMSE Env    no_newline=${False}
     ${read_env_title}    Read    19    013    41
+    Log To Console    ${\n}Actual Env Title is ${read_env_title} and Expected is ${WELCOME_TITLE}   no_newline=${False}
     Should Be Equal As Strings    ${WELCOME_TITLE}    ${read_env_title}
     Write Bare    ${WRITE_TEXT}
-    Take Screenshot
     Send Enter
     Write Bare    ${ENV_USERNAME}
     Move Next Field
     Write Bare    ${ENV_PASSWORD}
     Take Screenshot
     Send Enter
+    Log To Console    ${\n}Step2- Loggin succssfully in TPX AB IMSE Env    no_newline=${False}
     Write Bare    ${SELECT_NEWS}
     Take Screenshot
     Send Enter
 
 CRIS SS: Customer Records Information System Special Services
+    Log To Console    ${\n}Step1- Login into the TPX AB Cris Application    no_newline=${False}
     Write Bare    /for cris
     Send Enter
     ${read_app_loginTitle}    Read    17    031    35
+    Log To Console    ${\n}Actual App Login Page Title is ${read_app_loginTitle} and Expected is ${CRIS_APP_LOGINPAGE}   no_newline=${False}
     Should Be Equal As Strings    ${CRIS_APP_LOGINPAGE}    ${read_app_loginTitle}
     Take Screenshot
     Write Bare    ${APP_USERNAME}
     Write Bare    ${APP_PASSWORD}
-    Take Screenshot
     Send Enter
     ${read_app_Title}    Read    01    027    13
+    Log To Console    ${\n}Actual App Dashboard Title is ${read_app_Title} and Expected is ${CRIS_APP_TITLE}   no_newline=${False}
     Should Be Equal As Strings    ${CRIS_APP_TITLE}    ${read_app_Title}
     Take Screenshot
+    Log To Console    ${\n}Step2- Loggin succssfully in CRIS Application    no_newline=${False}
+    Log To Console    ${\n}Step3- verify Cris Application healthcheck    no_newline=${False}
     Send PF    1
-    Sleep    5s
     ${read_app_loginTitle}    Read    17    031    35
+    Log To Console    ${\n}Actual Title after logout App is ${read_app_loginTitle} and Expected is ${CRIS_APP_LOGINPAGE}   no_newline=${False}
     Should Be Equal As Strings    ${CRIS_APP_LOGINPAGE}    ${read_app_loginTitle}
+    Log To Console    ${\n}Step4- Logout Cris Application successfully    no_newline=${False}
     Take Screenshot
 
-InstallOrder
+Install_Order
+    Log To Console    ${\n}Step1- Login into the TPX AB Cris Application to Install Order    no_newline=${False}
     Write Bare    ${APP_USERNAME}
     Write Bare    ${APP_PASSWORD}
-    Take Screenshot
     Send Enter
+    Take Screenshot
     ${read_app_Title}    Read    01    027    13
+    Log To Console    ${\n}Actual App Dashboard Title is ${read_app_Title} and Expected is ${CRIS_APP_TITLE}   no_newline=${False}
     Should Be Equal As Strings    ${CRIS_APP_TITLE}    ${read_app_Title}
+    Log To Console    ${\n}Step2- Enter IN under function to install order on CRIS page and Go to the NAM Page  no_newline=${False}
     Write Bare in Position    in    23    032
     Send Enter
-    Comment    Enter NAM Details
-    ${BILLING_NAME}=  evaluate  utils.billingName()  modules=utils
+    Take Screenshot
+    Log To Console    ${\n}Step3- Enter NAM Page Details and Go to the BSC Screen    no_newline=${False}
+    ${BILLING_NAME}=    evaluate    utils.billingName()    modules=utils
     Write Bare in Position    ${BILLING_NAME}    04    006
     Write Bare in Position    ${SA_HOUSE_No}    05    012
     Write Bare in Position    ${sa_area}    05    022
@@ -62,40 +72,44 @@ InstallOrder
     Write Bare in Position    ${sa_PINCODE}    05    064
     Write Bare in Position    ${IN_KEY}    23    007
     Delete Field    23    047
-    Comment    delete start
     Send Enter
-    sleep    5s
+    Take Screenshot
+    Log To Console    ${\n}Step4- Enter BSC Page Details and Go to the LST Screen    no_newline=${False}
     Write Bare in Position    ${IN_SVC}    08    007
     Send Enter
-    sleep    5s
     Send Enter
+    Take Screenshot
+    Log To Console    ${\n}Step5- Enter LST Page Details and Go to the CCD Screen    no_newline=${False}
     Write Bare in Position    ${No_Number_Listed}    01    035
     Write Bare in Position    ${Listing_Type}    08    004
     Send Enter
     Send Enter
     Write Bare in Position    ${bus_type}    07    011
     Send Enter
-    sleep    10s
-    Send PF    9
     Take Screenshot
+    Log To Console    ${\n}Step6- Enter CCD Page Details & skip CLR Page and Jump to the EQP Screen    no_newline=${False}
+    Send PF    9
     Send Enter
-    sleep    5s
     Send Enter
+    Take Screenshot
+    Log To Console    ${\n}Step7- Enter EQP Page Details and Go to the BIL Screen    no_newline=${False}
     Write Bare in Position    ${add_s&e1}    09    002
     Write Bare in Position    ${add_s&e2}    11    002
     Write Bare in Position    ${DIR}    21    028
     Send Enter
     Send Enter
+    Log To Console    ${\n}Step8- Enter BIL Page Details & skip TEL page and Jump to the RMK Screen    no_newline=${False}
     Write Bare in Position    ${BILL_CHARGE}    08    007
     Write Bare in Position    ${BILL_CHARGE}    08    023
     Send Enter
     Send Enter
     Send Enter
     Take Screenshot
-    ${KEY_PHONE_No}=  evaluate  utils.telephone()  modules=utils
+    Log To Console    ${\n}Step9- Enter RMK Page Details and Go to the Service Order Screen    no_newline=${False}
+    ${KEY_PHONE_No}=    evaluate    utils.telephone()     modules=utils
     Write Bare in Position    ${KEY_PHONE_No}    01    004
-    ${REQUEST_DATE}=  evaluate  utils.requestDate()  modules=utils
-    ${DUE_DATE}=  evaluate  utils.dueDate()  modules=utils
+    ${REQUEST_DATE}=     evaluate    utils.requestDate()     modules=utils
+    ${DUE_DATE}=     evaluate    utils.dueDate()    modules=utils
     Write Bare in Position    ${REQUEST_DATE}    07    012
     Write Bare in Position    ${DUE_DATE}    07    027
     Delete Field    09    013
@@ -106,12 +120,10 @@ InstallOrder
     Take Screenshot
     Send Enter
     Take Screenshot
-    sleep    5s
     Delete Field    23    047
     Delete Field    23    079
     Write Bare in Position    sor    23    030
     Send Enter
-    Comment    Need to verify Assigned status
     Take Screenshot
     Write Bare in Position    com    23    030
     Send Enter
@@ -122,27 +134,24 @@ InstallOrder
     Write Bare in Position    ${COMPLETE_TIME}    21    034
     Write Bare in Position    ${COMPLETION_CK}    21    048
     Send Enter
-    Take Screenshot
-    sleep    5s
     Delete Field    23    047
     Delete Field    23    079
     Write Bare in Position    sor    23    030
     Send Enter
-    ${read_order_status}    Read    06    030    9
-    Should Be Equal As Strings    ${ORDER_STATUS}    ${read_order_status}
-
-    sleep    10s
     Take Screenshot
-
-
-
-
+    Log To Console    ${\n}Step10- On Service Order Screen Varify Order is completed or not   no_newline=${False}
+    ${read_order_status}    Read    06    030    9
+    Log To Console    ${\n}Actual Install Order is ${read_order_status} and Expected is ${ORDER_STATUS}   no_newline=${False}
+    Should Be Equal As Strings    ${ORDER_STATUS}    ${read_order_status}
     Send PF    1
-    Sleep    5s
+    Take Screenshot
+    Log To Console    ${\n}Step11- Once Order is completed Logout the CRIS Application   no_newline=${False}
     ${read_app_loginTitle}    Read    17    031    35
+    Log To Console    ${\n}Actual Title after logout App is ${read_app_loginTitle} and Expected is ${CRIS_APP_LOGINPAGE}   no_newline=${False}
     Should Be Equal As Strings    ${CRIS_APP_LOGINPAGE}    ${read_app_loginTitle}
     Take Screenshot
-    sleep    10s
+    Log To Console    ${\n}Step12- Logout Cris Application successfully    no_newline=${False}
+    sleep    5s
 *** Keywords ***
 Suite Setup
     Open Connection    ${HOST}
@@ -154,6 +163,7 @@ Suite Setup
     Sleep    3s
 
 Suite Teardown
+    Send PF    1
     Close Connection
     Sleep    1s
     # Verify String Not Found
